@@ -8,7 +8,7 @@
     android:paddingTop="6dp"
     android:paddingBottom="6dp"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="com.weblab.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
