@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnL
 
     @Override
     public void performLogin(String name) {
-
+        prefConfig.writeName(name);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new StatusFragment())
+                .commit();
     }
 }
