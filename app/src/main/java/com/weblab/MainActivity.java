@@ -7,7 +7,8 @@ import android.os.Bundle;
 import com.weblab.retrofit.ApiClient;
 import com.weblab.retrofit.ApiService;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.OnLoginFormActivityListener {
+public class MainActivity extends AppCompatActivity implements LoginFragment.OnLoginFormActivityListener,
+    StatusFragment.OnLogoutListener{
 
     public static PrefConfig prefConfig;
     public static ApiService apiService;
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnL
         prefConfig = new PrefConfig(this);
         apiService = ApiClient.getApiClient().create(ApiService.class);
 
-        if(findViewById(R.id.fragment_container) != null)
+        if (findViewById(R.id.fragment_container) != null)
         {
             if (savedInstanceState != null)
             {
@@ -39,7 +40,8 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnL
     }
 
     @Override
-    public void performRegister() {
+    public void performRegister()
+    {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new RegistrationFragment())
                 .addToBackStack(null)
@@ -47,10 +49,21 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnL
     }
 
     @Override
-    public void performLogin(String name) {
+    public void performLogin(String name)
+    {
         prefConfig.writeName(name);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, new StatusFragment())
+                .commit();
+    }
+
+    @Override
+    public void performLogout()
+    {
+        prefConfig.writeLoginStatus(false);
+        prefConfig.writeName("User");
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new LoginFragment())
                 .commit();
     }
 }
