@@ -17,32 +17,32 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class RegistrationFragment extends Fragment {
+public class RegistrationFragment extends Fragment
+{
 
     private EditText etName;
     private EditText etEmail;
     private EditText etPassword;
     private Button btRegister;
-    public RegistrationFragment() {
-
+    public RegistrationFragment()
+    {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_registration, container, false);
         etName = view.findViewById(R.id.etName);
         etEmail = view.findViewById(R.id.etEmail);
         etPassword = view.findViewById(R.id.etPassword);
         btRegister = view.findViewById(R.id.btRegister);
-        btRegister.setOnClickListener(new View.OnClickListener() {
+        btRegister.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 performRegistration();
             }
         });
@@ -75,7 +75,8 @@ public class RegistrationFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t)
+            {
 
             }
         });

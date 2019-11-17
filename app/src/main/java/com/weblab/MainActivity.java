@@ -4,20 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.weblab.retrofit.ApiClient;
-import com.weblab.retrofit.ApiService;
+import com.weblab.preference.PreferencesConfiguration;
+import com.weblab.service.retrofit.ApiClient;
+import com.weblab.service.retrofit.ApiService;
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.OnLoginFormActivityListener,
-    StatusFragment.OnLogoutListener{
-
-    public static PrefConfig prefConfig;
+    StatusFragment.OnLogoutListener
+{
+    public static PreferencesConfiguration prefConfig;
     public static ApiService apiService;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        prefConfig = new PrefConfig(this);
+        prefConfig = new PreferencesConfiguration(this);
         apiService = ApiClient.getApiClient().create(ApiService.class);
 
         if (findViewById(R.id.fragment_container) != null)

@@ -1,17 +1,22 @@
-package com.weblab;
+package com.weblab.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
-public class PrefConfig {
+import com.weblab.R;
+
+public class PreferencesConfiguration
+{
 
     private SharedPreferences sharedPreferences;
     private Context context;
 
-    public PrefConfig(Context context) {
+    public PreferencesConfiguration(Context context)
+    {
         this.context = context;
-        sharedPreferences = context.getSharedPreferences(context.getString(R.string.pref_file), Context.MODE_PRIVATE);
+        sharedPreferences = context.getSharedPreferences(context.getString(R.string.pref_file),
+                Context.MODE_PRIVATE);
     }
 
     public void writeLoginStatus(boolean status)

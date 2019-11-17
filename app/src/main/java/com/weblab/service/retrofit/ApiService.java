@@ -1,4 +1,4 @@
-package com.weblab.retrofit;
+package com.weblab.service.retrofit;
 
 import com.weblab.model.User;
 
@@ -6,7 +6,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-public interface ApiService {
+public interface ApiService
+{
 
     @GET("register")
     Call<User> performRegistration(@Query("name") String name,

@@ -2,7 +2,8 @@ package com.weblab.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+public class User
+{
 
     @SerializedName("response")
     private String response;
@@ -10,11 +11,13 @@ public class User {
     @SerializedName("name")
     private String name;
 
-    public String getResponse() {
+    public String getResponse()
+    {
         return response;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 }

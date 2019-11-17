@@ -21,11 +21,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment
+{
 
     private TextView tvRegister;
     private EditText etEmail;
@@ -34,36 +31,42 @@ public class LoginFragment extends Fragment {
 
     private OnLoginFormActivityListener listener;
 
-    public LoginFragment() {
+    public LoginFragment()
+    {
         // Required empty public constructor
     }
 
     public interface OnLoginFormActivityListener
     {
-        public void performRegister();
-        public void performLogin(String name);
+        void performRegister();
+        void performLogin(String name);
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         View view =  inflater.inflate(R.layout.fragment_login, container, false);
         tvRegister = view.findViewById(R.id.tvRegistrate);
         etEmail = view.findViewById(R.id.etEmail);
         etPassword = view.findViewById(R.id.etPassword);
         btLogin = view.findViewById(R.id.btLogin);
 
-        tvRegister.setOnClickListener(new View.OnClickListener() {
+        tvRegister.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 listener.performRegister();
             }
         });
 
-        btLogin.setOnClickListener(new View.OnClickListener() {
+        btLogin.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 performLogin();
             }
         });
@@ -71,7 +74,8 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {
+    public void onAttach(@NonNull Context context)
+    {
         super.onAttach(context);
         Activity activity = (Activity) context;
         listener = (OnLoginFormActivityListener) activity;
@@ -83,22 +87,28 @@ public class LoginFragment extends Fragment {
         String password = etPassword.getText().toString();
 
         Call<User> call = MainActivity.apiService.performUserLogin(email, password);
-        call.enqueue(new Callback<User>() {
+        call.enqueue(new Callback<User>()
+        {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (response.body().getResponse().equals("ok"))
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response)
+            {
+                if (response.isSuccessful() && response.body() != null)
                 {
-                    MainActivity.prefConfig.writeLoginStatus(true);
-                    listener.performLogin(response.body().getName());
-                }
-                else if (response.body().getResponse().equals("failed"))
-                {
-                    MainActivity.prefConfig.displayToast("Login failed");
+                    if (response.body().getResponse().equals("ok"))
+                    {
+                        MainActivity.prefConfig.writeLoginStatus(true);
+                        listener.performLogin(response.body().getName());
+                    }
+                    else if (response.body().getResponse().equals("failed"))
+                    {
+                        MainActivity.prefConfig.displayToast("Login failed");
+                    }
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t)
+            {
 
             }
         });
