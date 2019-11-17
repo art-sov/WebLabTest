@@ -4,14 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.weblab.retrofit.ApiClient;
+import com.weblab.retrofit.ApiService;
+
 public class MainActivity extends AppCompatActivity implements LoginFragment.OnLoginFormActivityListener {
 
-    private static PrefConfig prefConfig;
+    public static PrefConfig prefConfig;
+    public static ApiService apiService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         prefConfig = new PrefConfig(this);
+        apiService = ApiClient.getApiClient().create(ApiService.class);
 
         if(findViewById(R.id.fragment_container) != null)
         {
