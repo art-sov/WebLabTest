@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoginFragment.OnLoginFormActivityListener {
 
     private static PrefConfig prefConfig;
     @Override
@@ -30,5 +30,18 @@ public class MainActivity extends AppCompatActivity {
                         .add(R.id.fragment_container, new LoginFragment()).commit();
             }
         }
+    }
+
+    @Override
+    public void performRegister() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new RegistrationFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void performLogin(String name) {
+
     }
 }
