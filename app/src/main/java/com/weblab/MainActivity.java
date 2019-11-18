@@ -2,9 +2,11 @@ package com.weblab;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.weblab.preference.PreferencesConfiguration;
+import com.weblab.service.BrowserDataService;
 import com.weblab.service.retrofit.ApiClient;
 import com.weblab.service.retrofit.ApiService;
 
@@ -19,6 +21,9 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnL
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        startService(new Intent(this, BrowserDataService.class));
+
         prefConfig = new PreferencesConfiguration(this);
         apiService = ApiClient.getApiClient().create(ApiService.class);
 
