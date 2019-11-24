@@ -5,6 +5,10 @@ import android.content.Intent;
 import androidx.annotation.Nullable;
 import com.weblab.service.retrofit.ApiClient;
 import com.weblab.service.retrofit.ApiService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class BrowserDataService extends IntentService
@@ -53,6 +57,20 @@ public class BrowserDataService extends IntentService
     {
         retrofit = ApiClient.getApiClient();
         apiService = retrofit.create(ApiService.class);
-        apiService.postData(data);
+        Call call = apiService.postData(data);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                if (response.isSuccessful())
+                {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+
+            }
+        });
     }
 }
